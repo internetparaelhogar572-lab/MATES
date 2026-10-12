@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Tienda de mates y accesorios con una estética pastel y rosada."
+  />
+  <title>Rosa Mate | Mates y accesorios</title>
+
+  <style>
+    :root {
+      --rosa-claro: #fff0f5;
+      --rosa: #f6bfd3;
+      --rosa-fuerte: #d96f98;
+      --rosa-oscuro: #a94d72;
+      --crema: #fffaf5;
+      --lila: #eee5fa;
+      --texto: #493941;
+      --texto-suave: #78656e;
+      --blanco: #ffffff;
+      --sombra: 0 12px 30px rgba(169, 77, 114, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      color: var(--texto);
+      background: var(--crema);
+      line-height: 1.6;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .contenedor {
+      width: min(1100px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    /* Menú */
+    .encabezado {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255, 250, 245, 0.96);
+      border-bottom: 1px solid #f4dbe5;
+      backdrop-filter: blur(12px);
+    }
+
+    .barra-navegacion {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      min-height: 76px;
+    }
+
+    .logo {
+      color: var(--rosa-oscuro);
+      font-size: 1.5rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 24px;
+      align-items: center;
+    }
+
+    .menu a {
+      font-size: 0.95rem;
+      font-weight: 700;
+      transition: color 0.2s;
+    }
+
+    .menu a:hover,
+    .menu a:focus-visible {
+      color: var(--rosa-oscuro);
+    }
+
+    /* Portada */
+    .hero {
+      background:
+        radial-gradient(circle at 85% 20%, #e9dcf7 0, transparent 29%),
+        radial-gradient(circle at 10% 80%, #ffdbe9 0, transparent 35%),
+        linear-gradient(135deg, #fff0f5, #fffaf5);
+      padding: 100px 0;
+    }
+
+    .hero-contenido {
+      max-width: 700px;
+    }
+
+    .etiqueta {
+      display: inline-block;
+      padding: 7px 15px;
+      border-radius: 999px;
+      background: var(--blanco);
+      color: var(--rosa-oscuro);
+      font-size: 0.85rem;
+      font-weight: 800;
+      box-shadow: var(--sombra);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin: 22px 0 18px;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      line-height: 1.08;
+    }
+
+    .hero p {
+      max-width: 570px;
+      color: var(--texto-suave);
+      font-size: 1.1rem;
+    }
+
+    .boton {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 10px 20px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--rosa-fuerte);
+      color: var(--blanco);
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .boton:hover {
+      background: var(--rosa-oscuro);
+      transform: translateY(-2px);
+    }
+
+    .boton:focus-visible,
+    .menu a:focus-visible,
+    .subir-imagen:focus-visible {
+      outline: 3px solid var(--rosa-oscuro);
+      outline-offset: 3px;
+    }
+
+    .boton-secundario {
+      background: var(--blanco);
+      color: var(--rosa-oscuro);
+      border: 1px solid var(--rosa);
+    }
+
+    .boton-secundario:hover {
+      background: var(--rosa-claro);
+    }
+
+    /* Secciones */
+    section {
+      scroll-margin-top: 100px;
+    }
+
+    .seccion {
+      padding: 80px 0;
+    }
+
+    .seccion-rosa {
+      background: var(--rosa-claro);
+    }
+
+    .titulo-seccion {
+      text-align: center;
+      margin-bottom: 38px;
+    }
+
+    .titulo-seccion h2 {
+      margin-bottom: 8px;
+      color: var(--rosa-oscuro);
+      font-size: clamp(2rem, 4vw, 2.8rem);
+    }
+
+    .titulo-seccion p {
+      color: var(--texto-suave);
+    }
+
+    /* Productos */
+    .productos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+
+    .tarjeta {
+      overflow: hidden;
+      border: 1px solid #f2dce5;
+      border-radius: 22px;
+      background: var(--blanco);
+      box-shadow: var(--sombra);
+    }
+
+    .imagen-producto {
+      display: grid;
+      place-items: center;
+      height: 235px;
+      background: linear-gradient(135deg, #ffe1ec, #eee5fa);
+      overflow: hidden;
+    }
+
+    .imagen-producto img {
+      display: none;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .imagen-producto.con-imagen img {
+      display: block;
+    }
+
+    .imagen-producto.con-imagen .icono-producto {
+      display: none;
+    }
+
+    .icono-producto {
+      font-size: 5rem;
+    }
+
+    .contenido-tarjeta {
+      padding: 22px;
+    }
+
+    .contenido-tarjeta h3 {
+      margin-bottom: 7px;
+      font-size: 1.25rem;
+    }
+
+    .descripcion {
+      min-height: 52px;
+      margin-bottom: 16px;
+      color: var(--texto-suave);
+      font-size: 0.94rem;
+    }
+
+    .precio {
+      display: block;
+      margin-bottom: 18px;
+      color: var(--rosa-oscuro);
+      font-size: 1.35rem;
+      font-weight: 800;
+    }
+
+    .acciones-producto {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .acciones-producto .boton,
+    .subir-imagen {
+      font-size: 0.9rem;
+    }
+
+    .subir-imagen {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 9px 15px;
+      border: 1px solid var(--rosa);
+      border-radius: 999px;
+      background: var(--rosa-claro);
+      color: var(--rosa-oscuro);
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    /* Información y contacto */
+    .informacion {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .informacion p {
+      color: var(--texto-suave);
+    }
+
+    .contacto {
+      text-align: center;
+    }
+
+    .contacto p {
+      color: var(--texto-suave);
+    }
+
+    .pie {
+      padding: 26px 0;
+      background: #f8dce7;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .pie p {
+      margin: 0;
+    }
+
+    @media (max-width: 620px) {
+      .barra-navegacion {
+        flex-direction: column;
+        justify-content: center;
+        padding: 15px 0;
+        gap: 10px;
+      }
+
+      .menu {
+        justify-content: center;
+        gap: 8px 16px;
+      }
+
+      .hero {
+        padding: 75px 0;
+      }
+
+      section {
+        scroll-margin-top: 135px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="encabezado">
+    <div class="contenedor barra-navegacion">
+      <a class="logo" href="#inicio">♡ Rosa Mate</a>
+
+      <nav class="menu" aria-label="Menú principal">
+        <a href="#inicio">Inicio</a>
+        <a href="#productos">Productos</a>
+        <a href="#precios">Precios</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="contenedor hero-contenido">
+        <span class="etiqueta">Mates bonitos para todos los días ✨</span>
+        <h1>Tu momento favorito empieza con un mate.</h1>
+        <p>
+          Descubrí mates y accesorios con mucho encanto, colores suaves
+          y detalles hechos para acompañarte.
+        </p>
+        <a class="boton" href="#productos">Ver productos</a>
+      </div>
+    </section>
+
+    <section class="seccion" id="productos">
+      <div class="contenedor">
+        <div class="titulo-seccion">
+          <h2>Nuestros productos ♡</h2>
+          <p>Elegí tu favorito y consultanos para comprarlo.</p>
+        </div>
+
+        <!-- JavaScript agrega aquí las tarjetas de productos -->
+        <div class="productos" id="lista-productos"></div>
+      </div>
+    </section>
+
+    <section class="seccion seccion-rosa" id="precios">
+      <div class="contenedor informacion">
+        <h2>Precios y pedidos</h2>
+        <p>
+          Los precios están publicados en cada producto. Si querés consultar
+          disponibilidad, colores o formas de entrega, tocá el botón
+          <strong>Consultar</strong> del producto que te guste.
+        </p>
+        <p>
+          Los valores de ejemplo están expresados en pesos argentinos (ARS).
+          Podés cambiarlos fácilmente en el código.
+        </p>
+      </div>
+    </section>
+
+    <section class="seccion contacto" id="contacto">
+      <div class="contenedor">
+        <h2>Hablemos de mates 💌</h2>
+        <p>¿Tenés alguna pregunta o querés hacer un pedido?</p>
+        <a class="boton" href="mailto:contacto@rosamate.com">
+          Enviar un correo
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor">
+      <p>© <span id="anio"></span> Rosa Mate · Hecho con ♡</p>
+    </div>
+  </footer>
+
+  <script>
+    /*
+      PERSONALIZÁ TUS PRODUCTOS AQUÍ:
+      - nombre: nombre que se muestra en la tarjeta.
+      - descripcion: texto breve del producto.
+      - precio: valor numérico, sin el signo $.
+      - emoji: dibujo provisional mientras no haya foto.
+      - imagen: ruta de una foto subida a GitHub, por ejemplo:
+                "imagenes/mate-rosa.jpg"
+                Si todavía no tenés foto, dejá "".
+
+      Para sumar otro producto, copiá uno de los objetos de la lista.
+    */
+    const productos = [
+      {
+        nombre: "Mate Rosa Pastel",
+        descripcion: "Un clásico delicado para acompañar cada pausa.",
+        precio: 12500,
+        emoji: "🧉",
+        imagen: ""
+      },
+      {
+        nombre: "Mate Lila Soñado",
+        descripcion: "Un toque de color suave para tus tardes.",
+        precio: 13900,
+        emoji: "💜",
+        imagen: ""
+      },
+      {
+        nombre: "Bombilla Dorada",
+        descripcion: "El complemento perfecto para tu mate favorito.",
+        precio: 5900,
+        emoji: "✨",
+        imagen: ""
+      },
+      {
+        nombre: "Set Matero Aesthetic",
+        descripcion: "Mate y bombilla para regalar o regalarte.",
+        precio: 18900,
+        emoji: "🎀",
+        imagen: ""
+      }
+    ];
+
+    const listaProductos = document.getElementById("lista-productos");
+    const formatoPrecio = new Intl.NumberFormat("es-AR", {
+      style: "currency",
+      currency: "ARS",
+      maximumFractionDigits: 0
+    });
+
+    document.getElementById("anio").textContent =
+      new Date().getFullYear();
+
+    productos.forEach((producto, indice) => {
+      const tarjeta = document.createElement("article");
+      tarjeta.className = "tarjeta";
+
+      const contenedorImagen = document.createElement("div");
+      contenedorImagen.className = "imagen-producto";
+
+      const imagen = document.createElement("img");
+      imagen.alt = `Foto de ${producto.nombre}`;
+
+      const icono = document.createElement("span");
+      icono.className = "icono-producto";
+      icono.setAttribute("aria-hidden", "true");
+      icono.textContent = producto.emoji;
+
+      if (producto.imagen) {
+        imagen.src = producto.imagen;
+        contenedorImagen.classList.add("con-imagen");
+
+        // Si la ruta está mal, vuelve a mostrar el dibujo provisional.
+        imagen.onerror = () => {
+          contenedorImagen.classList.remove("con-imagen");
+        };
+      }
+
+      contenedorImagen.append(imagen, icono);
+
+      const contenido = document.createElement("div");
+      contenido.className = "contenido-tarjeta";
+
+      const titulo = document.createElement("h3");
+      titulo.textContent = producto.nombre;
+
+      const descripcion = document.createElement("p");
+      descripcion.className = "descripcion";
+      descripcion.textContent = producto.descripcion;
+
+      const precio = document.createElement("span");
+      precio.className = "precio";
+      precio.textContent = formatoPrecio.format(producto.precio);
+
+      const acciones = document.createElement("div");
+      acciones.className = "acciones-producto";
+
+      const botonConsulta = document.createElement("a");
+      botonConsulta.className = "boton";
+      botonConsulta.textContent = "Consultar";
+      botonConsulta.href =
+        "mailto:contacto@rosamate.com" +
+        "?subject=" +
+        encodeURIComponent(`Consulta por ${producto.nombre}`) +
+        "&body=" +
+        encodeURIComponent(
+          `¡Hola! Quiero consultar por ${producto.nombre} (${formatoPrecio.format(producto.precio)}).`
+        );
+
+      const identificadorInput = `foto-producto-${indice}`;
+
+      const botonImagen = document.createElement("label");
+      botonImagen.className = "subir-imagen";
+      botonImagen.htmlFor = identificadorInput;
+      botonImagen.textContent = "Agregar imagen";
+
+      const inputImagen = document.createElement("input");
+      inputImagen.type = "file";
+      inputImagen.id = identificadorInput;
+      inputImagen.accept = "image/*";
+      inputImagen.hidden = true;
+
+      let urlTemporal = null;
+
+      inputImagen.addEventListener("change", () => {
+        const archivo = inputImagen.files?.[0];
+        if (!archivo) return;
+
+        if (urlTemporal) {
+          URL.revokeObjectURL(urlTemporal);
+        }
+
+        urlTemporal = URL.createObjectURL(archivo);
+        imagen.src = urlTemporal;
+        contenedorImagen.classList.add("con-imagen");
+        botonImagen.textContent = "Cambiar imagen";
+      });
+
+      acciones.append(botonConsulta, botonImagen, inputImagen);
+      contenido.append(titulo, descripcion, precio, acciones);
+      tarjeta.append(contenedorImagen, contenido);
+      listaProductos.append(tarjeta);
+    });
+  </script>
+</body>
+</html>
